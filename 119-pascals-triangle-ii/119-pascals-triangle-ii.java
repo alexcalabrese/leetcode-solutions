@@ -1,6 +1,4 @@
 class Solution {
-    HashMap<String, Integer> memo = new HashMap<>();
-    
     public List<Integer> getRow(int rowIndex) {
         List<Integer> result = new ArrayList<>();
         
@@ -15,16 +13,7 @@ class Solution {
                
             for(int i = 0; i < rowIndex; i++){
                 if(i+1 < prev_row.size()){
-                    
-                    // Building map key
-                    StringBuilder str = new StringBuilder();
-                    str.append(rowIndex + "_" + i);
-                    String key = str.toString();
-                    
-                    if(!memo.containsKey(key))
-                        memo.put(key, calculate(i, prev_row));
-                    
-                    result.add(memo.get(key));
+                    result.add(calculate(i, prev_row));
                 }
             }
             
