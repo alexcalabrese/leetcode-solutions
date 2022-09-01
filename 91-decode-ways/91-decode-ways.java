@@ -1,28 +1,33 @@
 class Solution {    
     HashMap<Integer, Integer> map = new HashMap<>();
     
-    public int numDecodings(String S) {
-        map.put(S.length(), 1);
-        return helper(S, 0);    
+    public int numDecodings(String s) {
+        map.put(s.length(), 1);
+        return helper(s, 0);    
     }
     
-    private int helper(String S, int start){
-        if(S == null) return 0;
+    private int helper(String s, int start){
+        if(s == null) return 0;
+        
+        // Cached or end of the string
         if(map.containsKey(start)) return map.get(start);
         
-        if(S.charAt(start) == '0') return 0;
+        // Base case
+        if(s.charAt(start) == '0') return 0;
         
         int ways = 0;
         
-        ways += helper(S, start + 1);
+        // 1 digit case
+        ways += helper(s, start + 1);
         
-        if(start + 1 < S.length()){
-            int firstDigit = S.charAt(start) - '0';
-            int secondDigit = S.charAt(start + 1) - '0';
+        // 2 digit case
+        if(start + 1 < s.length()){
+            int firstDigit = s.charAt(start) - '0';
+            int secondDigit = s.charAt(start + 1) - '0';
             int number = firstDigit * 10 + secondDigit;
 
             if(number <= 26)
-                ways += helper(S, start + 2);
+                ways += helper(s, start + 2);
         }
 
         map.put(start, ways);
