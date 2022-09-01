@@ -22,8 +22,14 @@ class Solution {
         
         // 2 digit case
         if(start + 1 < s.length()){
+            // It return the number casted to int
             int firstDigit = s.charAt(start) - '0';
             int secondDigit = s.charAt(start + 1) - '0';
+
+            // first digit is more singificant so we have to multiply
+            // "12" -> firstDigit = 1, firstDigit = 2
+            
+            // number = 1*10 + 2 = 10 + 2 = 12
             int number = firstDigit * 10 + secondDigit;
 
             if(number <= 26)
