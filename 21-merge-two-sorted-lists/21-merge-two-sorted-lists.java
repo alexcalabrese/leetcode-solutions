@@ -8,37 +8,52 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-class Solution {    
-    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        ListNode dummy = new ListNode();
-        mergeTwoLists(list1, list2, dummy);
-        
-        return dummy.next;
+class Solution {
+    // Shorter Recursive solution
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {        
+        if(list1 == null) return list2;
+        if(list2 == null) return list1;
+            
+        if(list1.val < list2.val){
+            list1.next = mergeTwoLists(list1.next, list2);
+            return list1;
+        } else {
+            list2.next = mergeTwoLists(list1, list2.next);
+            return list2;
+        }
     }
     
-    public void mergeTwoLists(ListNode list1, ListNode list2, ListNode curr) {
-        if(list1 == null && list2 == null) return;
+// Longer Recursive solution
+//     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+//         ListNode dummy = new ListNode();
+//         mergeTwoLists(list1, list2, dummy);
         
-        if(list1 == null && list2 != null){
-            curr.next = list2;
-            return;
-        }
+//         return dummy.next;
+//     }
+    
+//     public void mergeTwoLists(ListNode list1, ListNode list2, ListNode curr) {
+//         if(list1 == null && list2 == null) return;
         
-        if(list2 == null && list1 != null){
-            curr.next = list1;
-            return;
-        }
+//         if(list1 == null && list2 != null){
+//             curr.next = list2;
+//             return;
+//         }
         
-        if(list1.val < list2.val){
-            curr.next = list1;
-            list1 = list1.next;
-        } else {
-            curr.next = list2;
-            list2 = list2.next;
-        }
+//         if(list2 == null && list1 != null){
+//             curr.next = list1;
+//             return;
+//         }
         
-        mergeTwoLists(list1, list2, curr.next);
-    }
+//         if(list1.val < list2.val){
+//             curr.next = list1;
+//             list1 = list1.next;
+//         } else {
+//             curr.next = list2;
+//             list2 = list2.next;
+//         }
+        
+//         mergeTwoLists(list1, list2, curr.next);
+//     }
     
 // Iterative
 //     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {        
